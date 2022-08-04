@@ -2,11 +2,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect }  from 'react';
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
 import LoginButton from './LoginButton'
 import LogoutButton from './LogoutButton'
 import SignupButton from './SignupButton'
-import { useAuth0 } from "@auth0/auth0-react";
+import HomePage from './HomePage.js'
 import logo from './logo.jpeg'
 
 function LoginPage() {
@@ -15,10 +16,9 @@ function LoginPage() {
   console.log(user);
   if (user) {
     return (
-      <div>
-        <span>{user.nickname}s HomePage</span>
-        <LogoutButton />
-      </div>
+      <>
+        <HomePage />
+      </>
     )
   }
   return (
