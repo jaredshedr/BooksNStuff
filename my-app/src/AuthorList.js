@@ -17,7 +17,7 @@ import BookShelf from './BookShelf';
 const Overlay = styled.div`
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, .7);
+  // background: rgba(0, 0, 0, .7);
   position: fixed;
   top: 0;
   left: 0;
@@ -62,7 +62,7 @@ function AuthorList() {
   if (authorModal) {
     return (
       <Overlay>
-        <BookShelf mainAuthor={mainAuthor}/>
+        <BookShelf getAll={getAll} mainAuthor={mainAuthor}/>
       </Overlay>
     )
   }

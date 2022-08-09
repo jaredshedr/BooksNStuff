@@ -13,7 +13,7 @@ import logo from './logo.jpeg'
 function LoginPage() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  console.log(user);
+  // console.log(user);
   if (user) {
     return (
       <>

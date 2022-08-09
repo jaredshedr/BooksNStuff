@@ -5,7 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const axios = require('axios');
 
-const { addAuthor, getAll, deleteAuthor } = require('../db/authors.js');
+const { addAuthor, getAll, deleteAuthor, addBook } = require('../db/authors.js');
 const { callbackify } = require('util');
 
 const app = express();
@@ -24,7 +24,6 @@ app.get('/authors', (req, res) => {
     }
   })
 })
-
 
 app.post('/authors', (req, res) => {
   addAuthor(req.body, (err, data) => {
@@ -60,7 +59,16 @@ app.post('/authors/books', (req, res) => {
   .catch((err) => res.status(500).send(err));
 })
 
-
+app.post('/authors/addbook', (req, res) => {
+  addBook(req.body, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      // console.log('it hitme')
+      res.status(200).send(data);
+    }
+  })
+})
 
 
 

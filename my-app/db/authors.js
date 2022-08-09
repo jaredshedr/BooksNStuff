@@ -6,7 +6,7 @@ const authorSchema = mongoose.Schema({
   userName: String,
   authorName: String,
   releases: [{name: String, date: String}],
-  books: [{ title: String, image: String, read: Boolean, Description: String }]
+  books: []
 });
 
 let Author = mongoose.model('Author', authorSchema);
@@ -24,18 +24,40 @@ module.exports.addAuthor = function (data, callback) {
 
 module.exports.getAll = function (user, callback) {
   // console.log('indb', user)
-  Author.find({username: user}).exec()
+  Author.find({userName: user}).exec()
     .then((res) => {
+      // console.log(res);
       callback(null, res);
     })
     .catch(err => callback(err, null))
 }
 
 module.exports.deleteAuthor = function (data, callback) {
-  console.log('in dbd', data);
-  Author.deleteOne({userName: data.user, authorName: data.author})
+  // console.log('in dbd', data);
+  Author.deleteOne({ _id: data.author}).exec()
     .then((res) => {
+      // console.log(res)
       callback(null, res)
     })
     .catch((err) => console.log(err))
+}
+
+module.exports.addBook = function (data, callback) {
+  // console.log('indb', data);
+  Author.find({userName: data.user, authorName: data.author})
+    .then((res) => {
+      // console.log(res);
+      let existing = res[0].books || [];
+      let newBook = {title: data.book.volumeInfo.title, image: data.book.volumeInfo.imageLinks.smallThumbnail, read: true, Description: data.book.volumeInfo.description}
+      existing.push(newBook);
+      Author.findOneAndUpdate({userName: data.user, authorName: data.author}, {books: existing}, { upsert: true })
+        .then((response) => {
+          // console.log(response);
+          Author.find({userName: data.user, authorName: data.author})
+            .then((response) => {
+              callback(null, response[0].books)
+            })
+        })
+  })
+  .catch(err => callback(err, null));
 }
