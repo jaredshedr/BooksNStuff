@@ -26,7 +26,7 @@ const BookList = styled.div`
   flex-wrap: wrap;
 `
 
-const BookShelf = ({mainAuthor, getAll, setMainAuthor}) => {
+const BookShelf = ({mainAuthor, getAll, setMainAuthor, setAuthorModal}) => {
   const { user } = useAuth0();
   const [bookSearch, setBookSearch]= useState('');
   const [bookResults, setBookResults] = useState(false)
@@ -66,10 +66,11 @@ const BookShelf = ({mainAuthor, getAll, setMainAuthor}) => {
 
   return (
     <Modal>
+      <button style={{ float: "right", marginRight: "10px", marginTop: "5px" }} className="button-55" onClick={() => setAuthorModal(false)}>x</button>
       <h3>{mainAuthor.authorName}</h3>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
+      <Form.Group style={{ marginLeft: "5px", marginRight: "5px" }} className="mb-3" controlId="formGroupEmail">
         <Form.Control onChange={(event) => setBookSearch(event.target.value)}type="text" placeholder="Search for Books" />
-        <button onClick={bookSearcher} className="button-55">Search</button>
+        <button style={{ marginBottom: "45px"}} onClick={bookSearcher} className="button-55">Search</button>
       </Form.Group>
       <BookList>
         {bookResults.length > 0 ? bookResults.map((item, index) => <Book selectBook={selectBook} book={item} key={index} />) : null}

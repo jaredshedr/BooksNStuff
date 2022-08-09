@@ -13,8 +13,8 @@ const AuthorBooks = ({book, deleteBook}) => {
 
   return (
     <>
-      <img style={{ margin: "5px" }} onClick={handleShow} src={book.image} alt="book-cover"></img>
-      <button style={{ marginLeft:"-10px", width: "25px", height: "25px"}} onClick={() => deleteBook(book.title)}>x</button>
+      <img className='button-55' style={{ margin: "10px" }} onClick={handleShow} src={book.image} alt="book-cover"></img>
+      <button style={{ marginLeft:"-19px", width: "25px", height: "25px"}} onClick={() => deleteBook(book.title)}>x</button>
       <Offcanvas style={{backgroundColor:"whitesmoke"}} show={show}>
         <Offcanvas.Header>
           <Offcanvas.Title><b>{book.title}</b></Offcanvas.Title>

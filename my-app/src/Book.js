@@ -6,13 +6,16 @@ import React, { useState, useEffect }  from 'react';
 
 const Book = ({book, selectBook}) => {
   // console.log(book);
-  return (
-    <>
-      <div>{book.volumeInfo.title}</div>
-      {book.volumeInfo.imageLinks ? <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book-cover"></img> : null}
-      <button onClick={() => selectBook(book)} className="button-55" >Select</button>
-    </>
-  );
+
+
+  if (book.volumeInfo.imageLinks) {
+    return (
+      <>
+        {book.volumeInfo.imageLinks ? <img className='button-55' style={{ margin: "5px" }} src={book.volumeInfo.imageLinks.smallThumbnail} alt="book-cover"></img> : null}
+        <button style={{marginTop:"125px" ,marginLeft: "-19px"}} onClick={() => selectBook(book)} className="button-55" >Select</button>
+      </>
+    );
+  }
 };
 
 export default Book;

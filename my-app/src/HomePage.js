@@ -11,12 +11,12 @@ import './App.css';
 function HomePage() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  console.log(user);
+  // console.log(user);
   return (
     <div className='home'>
       <ul className='home-nav'>
         <li><img style={{ width:"175px", height: "200px"}} src={logo} alt="IMG" /></li>
-        <li> <h3 style={{marginTop: "100px"}} className='login-form-title'>Welcome to BooksNstufF <i>{user.nickname}</i></h3></li>
+        <li> <h3 style={{ fontSize: "38px", marginTop: "100px"}} className='login-form-title'>Welcome to BooksNstufF <i>{user.nickname}</i></h3></li>
         <li style={{ marginTop: "150px", marginRight: "13px"}}><LogoutButton /></li>
       </ul>
       <div>

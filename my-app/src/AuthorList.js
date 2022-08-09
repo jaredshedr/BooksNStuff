@@ -57,20 +57,19 @@ function AuthorList() {
       .catch(err => console.log('error deleting', err))
   }
 
-
   if (authorModal) {
     return (
       <Overlay>
-        <BookShelf getAll={getAll} mainAuthor={mainAuthor} setMainAuthor={setMainAuthor}/>
+        <BookShelf setAuthorModal={setAuthorModal} getAll={getAll} mainAuthor={mainAuthor} setMainAuthor={setMainAuthor}/>
       </Overlay>
     )
   }
   return (
     <div>
       <Form.Group className="mb-3" controlId="formGroupEmail">
-        <Form.Label>Add Author</Form.Label>
+        <Form.Label style={{ marginTop: "5px" }} >Add Author</Form.Label>
         <Form.Control onChange={(event) => setAuthor(event.target.value)} type="text" placeholder="Brandon Sanderson" />
-        <button className="button-55" onClick={authorSearcher}>Add Author</button>
+        <button style={{ marginBottom: "5px", marginTop: "5px" }} className="button-55" onClick={authorSearcher}>Add Author</button>
       </Form.Group>
       <Table bordered hover variant="dark">
         <thead>
