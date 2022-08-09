@@ -58,7 +58,7 @@ body, html {
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  background: linear-gradient(-135deg, #c850c0, #7385e0);
 }
 
 
@@ -117,7 +117,7 @@ body, html {
   cursor: pointer;
   display: inline-block;
   font-family: Neucha, sans-serif;
-  font-size: 1rem;
+  font-size: 13px;
   line-height: 23px;
   outline: none;
   padding: .75rem;

@@ -5,7 +5,8 @@ const path = require('path');
 const cors = require('cors');
 const axios = require('axios');
 
-// const { addAuthor } = require('../db/authors.js');
+const { addAuthor, getAll, deleteAuthor } = require('../db/authors.js');
+const { callbackify } = require('util');
 
 const app = express();
 app.use(express.json());
@@ -13,16 +14,37 @@ app.use(cors(({ origin: '*', methods: ['GET','POST','DELETE','UPDATE','PUT','PAT
 
 app.use(express.static(path.join(__dirname, '../build')));
 
-app.post('/authors', (req, res) => {
-  addAuthor(req.body, (err, data) => {
+app.get('/authors', (req, res) => {
+  // console.log(req.query.user);
+  getAll(req.query.user, (err, data) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err);
     } else {
-      console.log(data);
+      res.status(200).send(data);
     }
   })
 })
 
+
+app.post('/authors', (req, res) => {
+  addAuthor(req.body, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  })
+})
+
+app.delete('/authors',(req, res) => {
+  deleteAuthor(req.body, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  })
+})
 
 app.post('/authors/books', (req, res) => {
   var config = {

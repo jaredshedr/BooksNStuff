@@ -24,7 +24,7 @@ function LoginPage() {
   return (
     <div className='login'>
       <div className='login-center'>
-        <img style={{ width: "125px", height: "150px", marginBottom: "-106px", marginLeft: "30px"}} src={logo} alt="IMG" />
+        <img style={{ width: "125px", height: "150px", marginBottom: "-106px", marginLeft: "-11px"}} src={logo} alt="IMG" />
         <h3 style={{marginLeft: "75px"}} className='login-form-title'>Welcome to BooksNstufF</h3>
         <LoginButton />
         <SignupButton />
