@@ -3,7 +3,6 @@
 import React, { useState, useEffect }  from 'react';
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
-import MailGun from './MailGun'
 import Author from './Author'
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
@@ -29,6 +28,7 @@ function AuthorList() {
   const [authorModal, setAuthorModal] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [mainAuthor, setMainAuthor] = useState('');
+  const [addBookModal, setAddBookModal] = useState(false);
 
   function authorSearcher() {
     event.preventDefault();
@@ -57,11 +57,22 @@ function AuthorList() {
       .catch(err => console.log('error deleting', err))
   }
 
+  function addBookTrack(author) {
+    console.log(author);
+  }
+
   if (authorModal) {
     return (
-      <Overlay>
+      <div>
         <BookShelf setAuthorModal={setAuthorModal} getAll={getAll} mainAuthor={mainAuthor} setMainAuthor={setMainAuthor}/>
-      </Overlay>
+      </div>
+    )
+  }
+  if (addBookModal) {
+    return (
+      <div>
+        your form here
+      </div>
     )
   }
   return (
@@ -80,7 +91,7 @@ function AuthorList() {
           </tr>
         </thead>
         <tbody>
-          {userInfo.map((item, index) => <Author setMainAuthor={setMainAuthor} setAuthorModal={setAuthorModal} deleteAuthor={deleteAuthor} key={index} author={item}/>)}
+          {userInfo.map((item, index) => <Author addBookTrack={addBookTrack} setAddBookModal={setAddBookModal} setMainAuthor={setMainAuthor} setAuthorModal={setAuthorModal} deleteAuthor={deleteAuthor} key={index} author={item}/>)}
         </tbody>
       </Table>
     </div>

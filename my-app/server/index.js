@@ -4,6 +4,11 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const axios = require('axios');
+const client = require('twilio')(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
+
 
 const { addAuthor, getAll, deleteAuthor, addBook, deleteBook } = require('../db/authors.js');
 
@@ -79,6 +84,23 @@ app.post('/authors/deletebook', (req, res) => {
     }
   })
 })
+
+app.post('/messages', (req, res) => {
+  res.header('Content-Type', 'application/json');
+  client.messages
+  .create({
+    from: process.env.TWILIO_PHONE_NUMBER,
+    to: req.body.to,
+    body: req.body.body
+  })
+  .then(() => {
+    res.send(JSON.stringify({ success: true }));
+  })
+  .catch(err => {
+    console.log(err);
+    res.send(JSON.stringify({ success: false }));
+  });
+});
 
 const port = 3030;
 app.listen(port, () => {

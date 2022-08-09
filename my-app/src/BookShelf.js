@@ -12,12 +12,9 @@ const Modal = styled.div`
   background-color: whitesmoke;
   border: 1px solid #979797;
   border-radius: 20px;
-  position: fixed;
-  z-index: 20;
   width: 1450px;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  margin: auto;
+  margin-top: 63px;
 `;
 
 const BookList = styled.div`
@@ -70,7 +67,7 @@ const BookShelf = ({mainAuthor, getAll, setMainAuthor, setAuthorModal}) => {
       <h3>{mainAuthor.authorName}</h3>
       <Form.Group style={{ marginLeft: "5px", marginRight: "5px" }} className="mb-3" controlId="formGroupEmail">
         <Form.Control onChange={(event) => setBookSearch(event.target.value)}type="text" placeholder="Search for Books" />
-        <button style={{ marginBottom: "45px"}} onClick={bookSearcher} className="button-55">Search</button>
+        <button style={{ marginBottom: "75px"}} onClick={bookSearcher} className="button-55">Search</button>
       </Form.Group>
       <BookList>
         {bookResults.length > 0 ? bookResults.map((item, index) => <Book selectBook={selectBook} book={item} key={index} />) : null}

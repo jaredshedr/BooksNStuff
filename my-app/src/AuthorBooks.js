@@ -1,28 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import Overlay from 'react-bootstrap/Overlay';
+import Popover from 'react-bootstrap/Popover';
 
 const AuthorBooks = ({book, deleteBook}) => {
   // console.log(book);
 
-  const [show, setShow] = useState(false);
-
-
-  const handleShow = () => setShow(show === true ? false : true);
-
   return (
     <>
-      <img className='button-55' style={{ margin: "10px" }} onClick={handleShow} src={book.image} alt="book-cover"></img>
+      <img className='button-55' style={{ margin: "10px" }} src={book.image} alt="book-cover"></img>
       <button style={{ marginLeft:"-19px", width: "25px", height: "25px"}} onClick={() => deleteBook(book.title)}>x</button>
-      <Offcanvas style={{backgroundColor:"whitesmoke"}} show={show}>
-        <Offcanvas.Header>
-          <Offcanvas.Title><b>{book.title}</b></Offcanvas.Title>
-        </Offcanvas.Header >
-        <Offcanvas.Body>
-          {book.Description}
-        </Offcanvas.Body>
-      </Offcanvas>
     </>
   );
 };
