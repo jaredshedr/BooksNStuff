@@ -29,6 +29,7 @@ function AuthorList() {
   const [author, setAuthor]= useState('');
   const [authorModal, setAuthorModal] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
+  const [mainAuthor, setMainAuthor] = useState('');
 
   function authorSearcher() {
     event.preventDefault();
@@ -61,7 +62,7 @@ function AuthorList() {
   if (authorModal) {
     return (
       <Overlay>
-        <BookShelf />
+        <BookShelf mainAuthor={mainAuthor}/>
       </Overlay>
     )
   }
@@ -81,7 +82,7 @@ function AuthorList() {
           </tr>
         </thead>
         <tbody>
-          {userInfo.map((item, index) => <Author deleteAuthor={deleteAuthor} key={index} author={item}/>)}
+          {userInfo.map((item, index) => <Author setMainAuthor={setMainAuthor} setAuthorModal={setAuthorModal} deleteAuthor={deleteAuthor} key={index} author={item}/>)}
         </tbody>
       </Table>
     </div>

@@ -49,7 +49,7 @@ app.delete('/authors',(req, res) => {
 app.post('/authors/books', (req, res) => {
   var config = {
     method: 'get',
-    url: `https://www.googleapis.com/books/v1/volumes?q={${req.body.author}}`,
+    url: `https://www.googleapis.com/books/v1/volumes?q={${req.body.book}}`,
     headers: {
       'API_KEY': process.env.API_KEY,
     }
