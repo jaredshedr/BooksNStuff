@@ -5,7 +5,7 @@ import React, { useState, useEffect }  from 'react';
 // import Col from 'react-bootstrap/Col';
 
 const Book = ({book, selectBook}) => {
-  console.log(book);
+  // console.log(book);
   return (
     <>
       <div>{book.volumeInfo.title}</div>

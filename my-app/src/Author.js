@@ -5,7 +5,7 @@ const Author = ({author, deleteAuthor, setAuthorModal, setMainAuthor}) => {
   // console.log(author);
   return (
     <tr>
-      <td><span onClick={() => {
+      <td><span style={{ paddingRight:"10px" }}onClick={() => {
         setMainAuthor(author)
         setAuthorModal(true)}}>{author.authorName}</span><button onClick={() => deleteAuthor(author._id)} className="button-55">x</button></td>
       <td></td>

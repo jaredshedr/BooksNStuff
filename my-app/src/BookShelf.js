@@ -26,7 +26,7 @@ const BookList = styled.div`
   flex-wrap: wrap;
 `
 
-const BookShelf = ({mainAuthor, getAll}) => {
+const BookShelf = ({mainAuthor, getAll, setMainAuthor}) => {
   const { user } = useAuth0();
   const [bookSearch, setBookSearch]= useState('');
   const [bookResults, setBookResults] = useState(false)
@@ -45,10 +45,19 @@ const BookShelf = ({mainAuthor, getAll}) => {
     let temp = {user: user.nickname, author: mainAuthor.authorName, book: book}
     axios.post('/authors/addbook', temp)
       .then((res) => {
-        mainAuthor.books = res.data
+        mainAuthor.books = res.data;
         setBookResults(false)
       })
       .catch((err) => console.log(err))
+  }
+
+  function deleteBook(book) {
+    let temp = {user: user.nickname, author: mainAuthor.authorName, book: book}
+    axios.post('/authors/deletebook', temp)
+    .then((res) => {
+      setMainAuthor({...mainAuthor, books: res.data})
+    })
+    .catch((err) => console.log(err))
   }
 
   useEffect(() => {
@@ -64,7 +73,7 @@ const BookShelf = ({mainAuthor, getAll}) => {
       </Form.Group>
       <BookList>
         {bookResults.length > 0 ? bookResults.map((item, index) => <Book selectBook={selectBook} book={item} key={index} />) : null}
-        {bookResults === false ? mainAuthor.books.map((item, index) => <AuthorBooks key={index} book={item} />) : null}
+        {bookResults === false ? mainAuthor.books.map((item, index) => <AuthorBooks deleteBook={deleteBook} key={index} book={item} />) : null}
       </BookList>
     </Modal>
   );

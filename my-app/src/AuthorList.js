@@ -7,7 +7,6 @@ import MailGun from './MailGun'
 import Author from './Author'
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-import DeleteButton from './DeleteButton';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
@@ -62,7 +61,7 @@ function AuthorList() {
   if (authorModal) {
     return (
       <Overlay>
-        <BookShelf getAll={getAll} mainAuthor={mainAuthor}/>
+        <BookShelf getAll={getAll} mainAuthor={mainAuthor} setMainAuthor={setMainAuthor}/>
       </Overlay>
     )
   }

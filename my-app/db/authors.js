@@ -58,6 +58,29 @@ module.exports.addBook = function (data, callback) {
               callback(null, response[0].books)
             })
         })
-  })
-  .catch(err => callback(err, null));
+    })
+    .catch(err => callback(err, null));
+}
+
+
+module.exports.deleteBook = function (data, callback) {
+  Author.find({userName: data.user, authorName: data.author})
+    .then((res) => {
+      // console.log(res);
+      let books = res[0].books;
+      for (let i = 0; i < books.length; i++) {
+        if (books[i].title === data.book) {
+          books.splice(i, 1)
+        }
+      }
+      Author.findOneAndUpdate({userName: data.user, authorName: data.author}, {books: books}, { upsert: true })
+        .then((response) => {
+          // console.log(response);
+          Author.find({userName: data.user, authorName: data.author})
+            .then((response) => {
+              callback(null, response[0].books)
+            })
+        })
+    })
+    .catch(err => callback(err, null));
 }
