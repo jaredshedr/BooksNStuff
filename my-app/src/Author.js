@@ -9,13 +9,16 @@ const Author = ({getAll, addBookTrack, setAddBookModal, author, deleteAuthor, se
 
   function eraseNewRelease(author) {
     let temp = {author: author, user: user.nickname}
-    console.log(temp);
+    // console.log(temp);
     axios.post('/erase/newrelease', temp)
       .then((res) => getAll())
       .catch((err) => console.log(err))
   }
 
   let dateTime = author.releases.length > 0 ? new Date(author.releases[0].date) : '';
+  if (author.releases.length > 0) {
+    dateTime.setDate(dateTime.getDate() + 1);
+  }
 
   return (
     <tr>

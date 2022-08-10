@@ -127,7 +127,7 @@ app.post('/messages', (req, res) => {
   //   });
 });
 
-let emailDispatch = schedule.scheduleJob('0 9 * * *', function(){
+let emailDispatch = schedule.scheduleJob('0 8 * * *', function(){
   console.log('The answer to life, the universe, and everything!');
   getAllData((err, data) => {
     if (err) {
@@ -139,6 +139,7 @@ let emailDispatch = schedule.scheduleJob('0 9 * * *', function(){
       for (let item of allData) {
         if (item.releases.length > 0) {
           let itemDate = new Date(item.releases[0].date).toString().slice(4, 15);
+          itemDate.setDate(itemDate.getDate() + 1);
           if (itemDate === currentDate) {
             client.messages
               .create({

@@ -68,6 +68,7 @@ function AuthorList() {
     setAddBookModal(false);
 
     let temp = {user: user.nickname, bookName: bookName, phone: phone, date: date, author: author}
+    console.log(temp);
     axios.post('/messages', temp)
       .then((res) => getAll())
       .catch((err) => console.log(err))
