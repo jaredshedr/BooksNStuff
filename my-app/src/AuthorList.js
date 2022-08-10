@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 import './App.css';
 import BookShelf from './BookShelf';
+import FormMessage from './FormMessage'
 
 const Overlay = styled.div`
   width: 100%;
@@ -29,6 +30,7 @@ function AuthorList() {
   const [userInfo, setUserInfo] = useState([]);
   const [mainAuthor, setMainAuthor] = useState('');
   const [addBookModal, setAddBookModal] = useState(false);
+  const [authorForm, setAuthorForm] = useState('');
 
   function authorSearcher() {
     event.preventDefault();
@@ -58,7 +60,17 @@ function AuthorList() {
   }
 
   function addBookTrack(author) {
-    console.log(author);
+    setAuthorForm(author);
+  }
+
+  function submitForm(bookName, phone, date, author) {
+    event.preventDefault()
+    setAddBookModal(false);
+
+    let temp = {user: user.nickname, bookName: bookName, phone: phone, date: date, author: author}
+    axios.post('/messages', temp)
+      .then((res) => getAll())
+      .catch((err) => console.log(err))
   }
 
   if (authorModal) {
@@ -71,7 +83,7 @@ function AuthorList() {
   if (addBookModal) {
     return (
       <div>
-        your form here
+        <FormMessage setAddBookModal={setAddBookModal} submitForm={submitForm} authorForm={authorForm}/>
       </div>
     )
   }
@@ -87,7 +99,6 @@ function AuthorList() {
           <tr>
             <th>Author Name</th>
             <th>Upcoming Releases</th>
-            <th>Schedule Email</th>
           </tr>
         </thead>
         <tbody>

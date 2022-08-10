@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/authors')
 const authorSchema = mongoose.Schema({
   userName: String,
   authorName: String,
-  releases: [{name: String, date: String}],
+  releases: [],
   books: []
 });
 
@@ -79,6 +79,28 @@ module.exports.deleteBook = function (data, callback) {
           Author.find({userName: data.user, authorName: data.author})
             .then((response) => {
               callback(null, response[0].books)
+            })
+        })
+    })
+    .catch(err => callback(err, null));
+}
+
+
+module.exports.addUpcomingRelease = function(data, callback) {
+  // console.log('in db', data);
+
+  Author.find({userName: data.user, authorName: data.author})
+    .then((res) => {
+      // console.log(res[0].releases);
+      let existing = res[0].releases || [];
+      let newRelease = {title: data.bookName, date: data.date}
+      existing.push(newRelease);
+      Author.findOneAndUpdate({userName: data.user, authorName: data.author}, {releases: existing}, { upsert: true })
+        .then((response) => {
+          // console.log(response);
+          Author.find({userName: data.user, authorName: data.author})
+            .then((response) => {
+              callback(null, response[0].releases)
             })
         })
     })
