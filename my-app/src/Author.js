@@ -21,8 +21,8 @@ const Author = ({getAll, addBookTrack, setAddBookModal, author, deleteAuthor, se
     <tr>
       <td><span onClick={() => {
         setMainAuthor(author)
-        setAuthorModal(true)}}>{author.authorName}</span><button style={{ float: "right" }} onClick={() => deleteAuthor(author._id)} className="button-55">x</button></td>
-      <td>{author.releases.length > 0 ? <span>{`${author.releases[0].title} / ${dateTime.toString().slice(4, 15)}`}</span> : null}{ author.releases.length === 0 ? <button onClick={() => {
+        setAuthorModal(true)}} style={{ fontSize: "17px" }} className='underline'>{author.authorName}</span><button style={{ float: "right" }} onClick={() => deleteAuthor(author._id)} className="button-55">x</button></td>
+      <td>{author.releases.length > 0 ? <span style={{ fontSize: "15px", marginLeft: "10px" }}> {`${author.releases[0].title} / ${dateTime.toString().slice(4, 15)}`}</span> : null}{ author.releases.length === 0 ? <button onClick={() => {
         addBookTrack(author.authorName)
         setAddBookModal(true)
         }} style={{float: "right"}} className="button-55">Add Book</button> : null}{author.releases.length > 0 ? <button onClick={() => eraseNewRelease(author.authorName)} style={{ marginLeft:"5px" }}className="button-55">x</button> : null}</td>

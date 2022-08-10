@@ -11,9 +11,10 @@ const Book = ({book, selectBook}) => {
   if (book.volumeInfo.imageLinks) {
     return (
       <>
-        {book.volumeInfo.imageLinks ? <img className='button-55' style={{ margin: "5px" }} src={book.volumeInfo.imageLinks.smallThumbnail} alt="book-cover"></img> : null}
-        <button style={{marginTop:"125px" ,marginLeft: "-19px"}} onClick={() => selectBook(book)} className="button-55" >Select</button>
+        {book.volumeInfo.imageLinks ? <img className='button-55' style={{ margin: "10px" }} src={book.volumeInfo.imageLinks.smallThumbnail} alt="book-cover"></img> : null}
+        <button style={{marginTop:"125px", marginLeft: "-19px"}} onClick={() => selectBook(book)} className="button-55" >Select</button>
       </>
+
     );
   }
 };

@@ -47,12 +47,13 @@ body, html {
   width: 100%;
   display: block;
   padding-bottom: 54px;
+  margin-left: -100px;
 }
 
 
 
 .home {
-  height: 103vh;
+  height: 105vh;
   padding: 15px;
   background: #9053c7;
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
@@ -74,27 +75,11 @@ body, html {
   flex-wrap: wrap;
   justify-content: space-between;
   list-style-type: none;
-  /* padding: 1px 130px 33px 95px; */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.underline:hover {
+  text-decoration: underline;
+}
 
 
 
