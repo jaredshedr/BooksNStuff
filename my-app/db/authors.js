@@ -106,3 +106,15 @@ module.exports.addUpcomingRelease = function(data, callback) {
     })
     .catch(err => callback(err, null));
 }
+
+
+module.exports.eraseNewRelease = function(data, callback) {
+
+  let existing = [];
+  Author.findOneAndUpdate({userName: data.user, authorName: data.author}, {releases: existing}, { upsert: true })
+    .then((response) => {
+      // console.log(response);
+      callback(null, 'erased')
+    })
+    .catch(err => callback(err, null));
+}

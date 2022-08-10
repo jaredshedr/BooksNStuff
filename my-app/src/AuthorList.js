@@ -90,9 +90,9 @@ function AuthorList() {
   return (
     <div>
       <Form.Group className="mb-3" controlId="formGroupEmail">
-        <Form.Label style={{ marginTop: "5px" }} >Add Author</Form.Label>
+        <Form.Label style={{ marginTop: "20px" }} >Add Author</Form.Label>
         <Form.Control onChange={(event) => setAuthor(event.target.value)} type="text" placeholder="Brandon Sanderson" />
-        <button style={{ marginBottom: "5px", marginTop: "5px" }} className="button-55" onClick={authorSearcher}>Add Author</button>
+        <button style={{ marginBottom: "40px", marginTop: "5px" }} className="button-55" onClick={authorSearcher}>Add Author</button>
       </Form.Group>
       <Table bordered hover variant="dark">
         <thead>
@@ -102,7 +102,7 @@ function AuthorList() {
           </tr>
         </thead>
         <tbody>
-          {userInfo.map((item, index) => <Author addBookTrack={addBookTrack} setAddBookModal={setAddBookModal} setMainAuthor={setMainAuthor} setAuthorModal={setAuthorModal} deleteAuthor={deleteAuthor} key={index} author={item}/>)}
+          {userInfo.map((item, index) => <Author getAll={getAll} addBookTrack={addBookTrack} setAddBookModal={setAddBookModal} setMainAuthor={setMainAuthor} setAuthorModal={setAuthorModal} deleteAuthor={deleteAuthor} key={index} author={item}/>)}
         </tbody>
       </Table>
     </div>

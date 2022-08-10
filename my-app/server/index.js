@@ -10,7 +10,7 @@ const client = require('twilio')(
 );
 
 
-const { addAuthor, getAll, deleteAuthor, addBook, deleteBook, addUpcomingRelease } = require('../db/authors.js');
+const { addAuthor, getAll, deleteAuthor, addBook, deleteBook, addUpcomingRelease, eraseNewRelease } = require('../db/authors.js');
 
 const app = express();
 app.use(express.json());
@@ -85,6 +85,17 @@ app.post('/authors/deletebook', (req, res) => {
   })
 })
 
+app.post('/erase/newrelease', (req, res) => {
+  eraseNewRelease(req.body, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      // console.log('it hitme')
+      res.status(200).send(data);
+    }
+  })
+})
+
 app.post('/messages', (req, res) => {
   // console.log(new Date (req.body.date))
 
@@ -96,22 +107,22 @@ app.post('/messages', (req, res) => {
     }
   })
 
-  res.header('Content-Type', 'application/json');
-  client.messages
-    .create({
-      messagingServiceSid: process.env.MID,
-      from: process.env.TWILIO_PHONE_NUMBER,
-      to: req.body.phone,
-      body: `${req.body.bookName} by ${req.body.author} is coming out!`,
-      sendAt: new Date(req.body.date),
-      scheduleType: 'fixed'
-    })
-    .then(() => {
-      console.log('message created')
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  // res.header('Content-Type', 'application/json');
+  // client.messages
+  //   .create({
+  //     messagingServiceSid: process.env.MID,
+  //     from: process.env.TWILIO_PHONE_NUMBER,
+  //     to: req.body.phone,
+  //     body: `${req.body.bookName} by ${req.body.author} is coming out!`,
+  //     sendAt: new Date(req.body.date),
+  //     scheduleType: 'fixed'
+  //   })
+  //   .then(() => {
+  //     console.log('message created')
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
 });
 
 const port = 3030;
