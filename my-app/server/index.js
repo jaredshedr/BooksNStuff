@@ -8,9 +8,11 @@ const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
+const schedule = require('node-schedule');
 
 
-const { addAuthor, getAll, deleteAuthor, addBook, deleteBook, addUpcomingRelease, eraseNewRelease } = require('../db/authors.js');
+
+const { addAuthor, getAll, deleteAuthor, addBook, deleteBook, addUpcomingRelease, eraseNewRelease, getAllData } = require('../db/authors.js');
 
 const app = express();
 app.use(express.json());
@@ -123,6 +125,38 @@ app.post('/messages', (req, res) => {
   //   .catch(err => {
   //     console.log(err);
   //   });
+});
+
+let emailDispatch = schedule.scheduleJob('0 9 * * *', function(){
+  console.log('The answer to life, the universe, and everything!');
+  getAllData((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      let allData = data;
+      let currentDate = new Date().toString().slice(4, 15);
+
+      for (let item of allData) {
+        if (item.releases.length > 0) {
+          let itemDate = new Date(item.releases[0].date).toString().slice(4, 15);
+          if (itemDate === currentDate) {
+            client.messages
+              .create({
+                from: process.env.TWILIO_PHONE_NUMBER,
+                to: item.releases[0].phone,
+                body: `${item.releases[0].title} is coming out today!`
+              })
+              .then(() => {
+                console.log('message created')
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          }
+        }
+      }
+    }
+  })
 });
 
 const port = 3030;

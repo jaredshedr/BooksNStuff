@@ -93,7 +93,7 @@ module.exports.addUpcomingRelease = function(data, callback) {
     .then((res) => {
       // console.log(res[0].releases);
       let existing = res[0].releases || [];
-      let newRelease = {title: data.bookName, date: data.date}
+      let newRelease = {title: data.bookName, date: data.date, phone: data.phone}
       existing.push(newRelease);
       Author.findOneAndUpdate({userName: data.user, authorName: data.author}, {releases: existing}, { upsert: true })
         .then((response) => {
@@ -117,4 +117,11 @@ module.exports.eraseNewRelease = function(data, callback) {
       callback(null, 'erased')
     })
     .catch(err => callback(err, null));
+}
+
+
+module.exports.getAllData = function (callback) {
+  Author.find()
+    .then(res => callback(null, res))
+    .catch(err => callback(err, null))
 }

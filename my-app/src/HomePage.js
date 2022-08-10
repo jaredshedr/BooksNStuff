@@ -17,7 +17,7 @@ function HomePage() {
       <ul className='home-nav'>
         <li><img style={{ marginTop:"5px", width:"175px", height: "200px"}} src={logo} alt="IMG" /></li>
         <li> <h3 style={{ fontSize: "38px", marginTop: "55px"}} className='login-form-title'>Welcome to BooksNstufF <i>{user.nickname}</i></h3></li>
-        <li style={{ marginTop: "150px", marginRight: "13px"}}><LogoutButton /></li>
+        <li style={{ marginTop: "150px", marginRight: "17px"}}><LogoutButton /></li>
       </ul>
       <div>
         <AuthorList />
