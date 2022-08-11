@@ -21,7 +21,7 @@ const FormMessage = ({ setAddBookModal ,authorForm, submitForm }) => {
 
   return (
     <Modal>
-      <div className="container">
+      <div style={{ marginTop: "15px" }} className="container">
         <button style={{ float: "right", marginRight: "10px", marginTop: "5px" }} className="button-55" onClick={() => setAddBookModal(false)}>x</button>
         <form onSubmit={() => submitForm(bookName, phone, date, authorForm)} className="well form-horizontal">
           <fieldset>
@@ -31,7 +31,7 @@ const FormMessage = ({ setAddBookModal ,authorForm, submitForm }) => {
               <label className="col-md-4 control-label">Book Name</label>
                 <div className="col-md-4 inputGroupContainer">
                 <div className="input-group">
-                <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
+                <span className="input-group-addon"><i className="glyphicon glyphicon-bookmark"></i></span>
                 <input required onChange={(event) => setBookName(event.target.value)}  name="Book Name" placeholder="Book Name" className="form-control"  type="text" />
                 </div>
               </div>
