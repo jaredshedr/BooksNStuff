@@ -14,7 +14,7 @@ const Modal = styled.div`
   border-radius: 20px;
   width: 1450px;
   margin: auto;
-  margin-top: 63px;
+  margin-top: 55px;
 `;
 
 const BookList = styled.div`

@@ -53,8 +53,8 @@ body, html {
 
 
 .home {
-  height: 105vh;
-  padding: 15px;
+  height: 112vh;
+  padding: 15px 30px;
   background: #9053c7;
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
@@ -80,7 +80,6 @@ body, html {
 .underline:hover {
   text-decoration: underline;
 }
-
 
 
 

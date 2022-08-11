@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-
 const Modal = styled.div`
   text-align: center;
   background-color: whitesmoke;
@@ -51,8 +50,3 @@ const AuthorBooks = ({book, deleteBook}) => {
 };
 
 export default AuthorBooks;
-
-
-
-// <div>{book.title}</div>
-// <img src={book.image} alt="book-cover"></img>
