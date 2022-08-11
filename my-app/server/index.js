@@ -127,7 +127,7 @@ app.post('/messages', (req, res) => {
   //   });
 });
 
-let emailDispatch = schedule.scheduleJob('0 8 * * *', function(){
+let emailDispatch = schedule.scheduleJob('0 9 * * *', function(){
   console.log('The answer to life, the universe, and everything!');
   getAllData((err, data) => {
     if (err) {
@@ -138,9 +138,10 @@ let emailDispatch = schedule.scheduleJob('0 8 * * *', function(){
 
       for (let item of allData) {
         if (item.releases.length > 0) {
-          let itemDate = new Date(item.releases[0].date).toString().slice(4, 15);
-          itemDate.setDate(itemDate.getDate() + 1);
-          if (itemDate === currentDate) {
+          let itemDate = new Date(item.releases[0].date);
+          let dateModified = new Date(itemDate.setDate(itemDate.getDate() + 1)).toString().slice(4, 15);
+          if (dateModified === currentDate) {
+            // console.log('yay')
             client.messages
               .create({
                 from: process.env.TWILIO_PHONE_NUMBER,
