@@ -14,6 +14,8 @@ This app was built with React, Express, MongoDB / Mongoose, node-schedule / twil
 
 ### Executing program
 
+First navigate to my-app, then run
+
 ```
 npm install
 
